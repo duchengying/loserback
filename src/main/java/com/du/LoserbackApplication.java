@@ -19,16 +19,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 * 即：一开始使用@SpringBootApplication  @MapperScan("com.du.dao")是无法装配dao
 * 然后使用其他3个注解就可以自动装配
 * */
-public class LoserbackApplication extends WebMvcConfigurerAdapter {
-	@Autowired
-	JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+public class LoserbackApplication{
+
 	public static void main(String[] args) {
 		SpringApplication.run(LoserbackApplication.class, args);
 	}
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(jwtAuthenticationTokenFilter)
-				.excludePathPatterns("/login");
 
-
-	}
 }

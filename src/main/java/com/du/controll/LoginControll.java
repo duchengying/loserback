@@ -31,7 +31,7 @@ public class LoginControll {
         //这里可以的方法的重载-参数的个数来判断是否是管理员登录
        String ss=loginService.login(student_num,student_pwd,check);
     if(ss!="登录失败"&&ss!=null&&ss!=""){
-        String token=jwtTokenUtil.createJWT("11",student_num,232323);
+        String token=jwtTokenUtil.createJWT(student_num);
        /* response.setHeader("Content-Types",token);
         Cookie cokie=new Cookie("token",token);
         response.addCookie(cokie);
@@ -39,8 +39,9 @@ public class LoginControll {
         login.setName(ss);
         login.setTime(new Date().toString());
         login.setToken(token);
-        System.out.println("测试git");
-        System.out.println("测试第二次");
+        login.setNum(student_num);
+      /*  System.out.println("测试git");
+        System.out.println("测试第二次");*/
 
 
     }

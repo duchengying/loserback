@@ -11,6 +11,8 @@ public class Login {
     private   String name;
     private String time;
     private String token;
+    private  String num;//账号
+
 
     public String getToken() {
         return token;
@@ -35,4 +37,12 @@ public class Login {
     public void setTime(String time) {
         this.time = time;
     }
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
 }
