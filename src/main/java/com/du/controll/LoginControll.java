@@ -39,7 +39,7 @@ public class LoginControll {
         login.setName(ss);
         login.setTime(new Date().toString());
         login.setToken(token);
-
+        System.out.println("测试git");
 
 
     }
