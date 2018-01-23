@@ -251,4 +251,22 @@
     lose_local LIKE  %#{local}%
   </if>
 </select>
+
+  <!--审核-->
+  <update id="checked" parameterType="java.lang.Integer">
+    UPDATE lose_goods
+    SET lose_checked="是"
+    WHERE lose_id=#{id}
+  </update>
+
+  <!--查询所有未审核的信息-->
+  <select id="select_check">
+    SELECT * FROM lose_goods
+    WHERE lose_checked="否"
+  </select>
+  <!--查询所有已经审核的信息-->
+  <select id="select_checked">
+    SELECT * FROM lose_goods
+    WHERE lose_checked="是"
+  </select>
 </mapper>

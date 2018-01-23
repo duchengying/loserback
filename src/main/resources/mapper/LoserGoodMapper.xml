@@ -249,4 +249,21 @@
     </if>
   </select>
 
+  <!--审核-->
+  <update id="checked" parameterType="java.lang.Integer">
+    UPDATE loser_goods
+    SET loser_checked="是"
+    WHERE loser_id=#{id}
+  </update>
+
+  <!--查询所有未审核的信息-->
+  <select id="select_check">
+    SELECT * FROM loser_goods
+    WHERE loser_checked="否"
+  </select>
+  <!--查询所有已经审核的信息-->
+  <select id="select_checked">
+    SELECT * FROM loser_goods
+    WHERE loser_checked="是"
+  </select>
 </mapper>

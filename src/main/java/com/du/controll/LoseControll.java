@@ -3,6 +3,7 @@ package com.du.controll;
 import com.du.entry.LoseGood;
 
 import com.du.service.LoseService;
+import com.du.tool.PagedResult;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -135,12 +136,13 @@ public class LoseControll {
     /*查询所有的lose信息--分页处理*/
     @RequestMapping("all_lose")
     @ResponseBody
-    public ArrayList<LoseGood> all_lose(){
-        System.out.println("tesat");
-
-        ArrayList<LoseGood> loseGoods=loseService.all_lose();
-
-        return loseGoods;
+    public PagedResult<LoseGood> all_lose(Integer pageNumber, Integer pageSize){
+        try {
+            PagedResult<LoseGood> pageResult = loseService.all_lose(pageNumber, pageSize);
+            return pageResult;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /*添加信息后 会自动搜索相关的信息得出结果*/

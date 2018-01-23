@@ -7,6 +7,9 @@ import com.du.entry.LoseGood;
 import com.du.entry.LoserGood;
 import com.du.entry.Manager;
 import com.du.entry.StudentUser;
+import com.du.tool.BeanUtil;
+import com.du.tool.PagedResult;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,8 @@ public class StudentUserService {
 
         return studentUserMappers;
     }
+
+
     public ArrayList<LoserGood> auto_loser(int start,int end){
         System.out.print(start+end);
         if(loserGoodMapper==null){
@@ -87,7 +92,46 @@ public class StudentUserService {
            return studentUser;
        }
     }
+
+    /*
+    * manager:删除用户信息
+    * */
+
+    public ArrayList<String> delete(String... id){
+        ArrayList<String> error=new ArrayList<String>();
+        for(String s:id){
+           int i= studentUserMapper.deleteByPrimaryKey(s);
+           if(i<=0){
+               error.add(s);
+           }
+        }
+        return error;
+    }
+
+    /*
+    * manager：添加用户
+    * */
     /*添加留言信息*/
+    public boolean addUser(StudentUser studentUser){
+
+        int i= studentUserMapper.insert(studentUser);
+        if(i>=0){
+            return true;
+        }else{
+            System.out.print("修改失败");
+            return false;
+        }
+
+    }
+    /*
+    * manager:查询所有的用户信息
+    * */
+    public PagedResult<StudentUser> select_AllUser_Page(Integer pageNo, Integer pageSize ) {
+        pageNo = pageNo == null?1:pageNo;
+        pageSize = pageSize == null?10:pageSize;
+        PageHelper.startPage(pageNo,pageSize);  //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
+        return BeanUtil.toPagedResult(studentUserMapper.selectAll());
+    }
     public boolean addAdvise(String num,String msg){
         return true;
     }

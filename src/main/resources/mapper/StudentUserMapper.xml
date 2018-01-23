@@ -142,4 +142,9 @@
     password = #{password,jdbcType=VARCHAR}
     where student_num = #{studentNum,jdbcType=VARCHAR}
   </update>
+<!--Manager：查询所有的用户信息-->
+  <select id="selectAll">
+    SELECT * FROM school_user
+
+  </select>
 </mapper>

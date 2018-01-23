@@ -75,8 +75,8 @@ public class JwtAuthenticationTokenFilter extends HandlerInterceptorAdapter {
         System.out.println("请求路径："+url+"用户:"+ip+",访问目标:"+method.getDeclaringClass().getName() + "." + method.getName());*/
         String authHeader = request.getHeader(this.tokenHeader);
         String method = request.getMethod();
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-       /* if(method=="OPTIONS"){
+        /* response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+       if(method=="OPTIONS"){
             System.out.println("token为空");
             return true;
         }if(authHeader==null&&authHeader==""){
@@ -96,14 +96,20 @@ public class JwtAuthenticationTokenFilter extends HandlerInterceptorAdapter {
         }*/
         i++;
         System.out.println(i);
-        if (authHeader == null&&method=="OPTIONS") {
+        System.out.println(method);
+        System.out.println("token:"+authHeader);
+        /*if(authHeader==null&&method.equals("OPTIONS")){
+            System.out.println("sdfqwdq");
+            return false;
+        }else {
+            return true;
+        }*/
+        if(method.equals("OPTIONS")) {
             System.out.println("weikong");
             return true;
-        }
-        if(authHeader==null){
+        }else if(authHeader==null){
             return false;
-        }
-        if (authHeader != null) {
+        }else{
             System.out.println("buweikong");
             System.out.println(authHeader);
             if (JwtTokenUtil.parseJWT(authHeader)) {
@@ -114,7 +120,7 @@ public class JwtAuthenticationTokenFilter extends HandlerInterceptorAdapter {
                 return false;
             }
         }
-        return true;
+
     }
 
 

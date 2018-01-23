@@ -88,8 +88,8 @@ public class StudentUserControll {
     public ArrayList<?> search(String lose_type,String goods_type,String time,String local,String key){
 
      ArrayList<?> arrayList=autoSearch.search(lose_type, goods_type, time, local, key);
-
-
+        /*可以收到前端发来的信息*/
+        //System.out.println("接收到前端的信息："+lose_type+goods_type+time+local+key);
     return arrayList;
     }
 
@@ -113,17 +113,17 @@ public class StudentUserControll {
 
 
     }
-    /*发送邮件*/
+    /*发送邮件*//*
     @ResponseBody
     @RequestMapping("send_email")
-    public String sendEmail(/*邮件实体*/){
-        /*调用同用的方法*/
+    public String sendEmail(*//*邮件实体*//*){
+        *//*调用同用的方法*//*
         return "";
-    }
+    }*/
     @ResponseBody
     @RequestMapping("get_email")
     public String getEmail(/*邮件实体*/){
-        /*调用同用的方法*/
+        /*调用系统邮件*/
         return "";
     }
 

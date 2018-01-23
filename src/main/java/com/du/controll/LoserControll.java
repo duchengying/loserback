@@ -1,8 +1,10 @@
 package com.du.controll;
 
 
+import com.du.entry.LoseGood;
 import com.du.entry.LoserGood;
 import com.du.service.LoserService;
+import com.du.tool.PagedResult;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,10 +113,12 @@ public class LoserControll {
     * */
     @ResponseBody
     @RequestMapping("all_loser")
-    public ArrayList<LoserGood> all_lose(){
-        System.out.println("loser   scontroll");
-        ArrayList<LoserGood> loserGoods=loserService.all_loser();
-
-        return loserGoods;
+    public PagedResult<LoserGood> all_lose(Integer pageNumber, Integer pageSize){
+        try {
+            PagedResult<LoserGood> pageResult = loserService.all_loser(pageNumber, pageSize);
+            return pageResult;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

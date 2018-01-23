@@ -76,5 +76,10 @@ public interface LoseGoodMapper {
 
     ArrayList<LoseGood> searchByKey(@Param(value = "key") String key,@Param(value = "type") String type,
                                     @Param(value = "time") String time,@Param(value = "local") String local);
-
+    /*审核*/
+    int checked(int id);
+    /*查询未审核的信息*/
+    ArrayList<LoseGood> select_check();
+    /*查询已审核的信息*/
+    ArrayList<LoseGood> select_checked();
 }

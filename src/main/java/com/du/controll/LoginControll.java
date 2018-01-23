@@ -40,6 +40,8 @@ public class LoginControll {
         login.setTime(new Date().toString());
         login.setToken(token);
         login.setNum(student_num);
+        response.addHeader("Access-Control-Expose-Headers","token");
+        response.addHeader("token",token);
       /*  System.out.println("测试git");
         System.out.println("测试第二次");*/
 
