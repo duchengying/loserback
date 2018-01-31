@@ -97,17 +97,35 @@ public class JwtAuthenticationTokenFilter extends HandlerInterceptorAdapter {
         i++;
         System.out.println(i);
         System.out.println(method);
-        System.out.println("token:"+authHeader);
+        System.out.println("token:" + authHeader);
         /*if(authHeader==null&&method.equals("OPTIONS")){
             System.out.println("sdfqwdq");
             return false;
         }else {
             return true;
         }*/
-        if(method.equals("OPTIONS")) {
+        if (method.equals("OPTIONS")) {
             System.out.println("weikong");
             return true;
-        }else if(authHeader==null){
+        } else if (authHeader == null) {
+            return false;
+        }
+        if (authHeader != null && !method.equals("OPTIONS")) {
+            System.out.println("buweikong");
+            System.out.println(authHeader);
+            if (JwtTokenUtil.parseJWT(authHeader)) {
+                System.out.println("验证成功");
+                return true;
+            } else {
+                System.out.println("验证失败");
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+        /*if(authHeader==null){
             return false;
         }else{
             System.out.println("buweikong");
@@ -119,13 +137,13 @@ public class JwtAuthenticationTokenFilter extends HandlerInterceptorAdapter {
                 System.out.println("验证失败");
                 return false;
             }
-        }
 
-    }
+        }*/
 
 
 
 
     // controller处理完成
 
-}
+
+    }

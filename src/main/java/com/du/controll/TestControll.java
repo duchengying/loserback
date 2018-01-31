@@ -1,6 +1,9 @@
 package com.du.controll;
 
+import com.du.entry.Emaile_M;
 import com.du.entry.LoseGood;
+import com.du.service.Email_MService;
+import com.du.service.StudentUserService;
 import com.du.service.Testservice;
 import com.du.tool.PagedResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by dcy on 2017/12/21.
@@ -26,6 +32,8 @@ public class TestControll {
 
     @Autowired
     Testservice testservice;
+    @Autowired
+    StudentUserService studentUserService;
 
     @RequestMapping("pp")
     public String test() {
@@ -55,5 +63,26 @@ public class TestControll {
         } catch (Exception e) {
             return null;
         }
+    }
+    @RequestMapping("sendemail")
+    public void testssa(){
+        Emaile_M emaile_m=new Emaile_M(1,"ssss","qw","sffsasdas");
+
+        System.out.println(emaile_m.toString());
+        Email_MService email_mService=new Email_MService();
+        email_mService.sendemail(emaile_m);
+
+    }
+
+    @RequestMapping("selectAlluser")
+    public void selectAllUser(){
+            studentUserService.selectAllUser();
+    }
+
+    public void proxytest(){
+        LoginControll loginControll=new LoginControll();
+        loginControll.getClass().getMethods();
+        HashSet Hash=new HashSet();
+        HashMap hashMap=new HashMap();
     }
 }

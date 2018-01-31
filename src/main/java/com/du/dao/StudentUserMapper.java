@@ -60,5 +60,7 @@ public interface StudentUserMapper {
     int updatePwd(@Param(value="password")String password,@Param(value="studentNum")String studentNum);
 
     ArrayList<StudentUser> selectAll();
+    ArrayList<StudentUser> selectAll1();
+
 
 }

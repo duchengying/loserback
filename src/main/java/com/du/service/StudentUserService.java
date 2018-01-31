@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
 
 /**
  * Created by dcy on 2017/12/22.
@@ -132,6 +134,21 @@ public class StudentUserService {
         PageHelper.startPage(pageNo,pageSize);  //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
         return BeanUtil.toPagedResult(studentUserMapper.selectAll());
     }
+    /*测试储存过程*/
+    public void selectAllUser(){
+        long t1=System.currentTimeMillis();
+        studentUserMapper.selectAll1();
+        long t2=System.currentTimeMillis();
+        studentUserMapper.selectAll();
+        long t3=System.currentTimeMillis();
+        System.out.println("函数：");
+        System.out.println(t2-t1);
+        System.out.println("正常：");
+        System.out.println(t3-t2);
+
+
+    }
+
     public boolean addAdvise(String num,String msg){
         return true;
     }

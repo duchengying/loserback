@@ -1,8 +1,10 @@
 package com.du.controll;
 
+import com.du.entry.Emaile_M;
 import com.du.entry.LoseGood;
 import com.du.entry.LoserGood;
 import com.du.entry.StudentUser;
+import com.du.service.Email_MService;
 import com.du.service.LoseService;
 import com.du.service.LoserService;
 import com.du.service.StudentUserService;
@@ -34,6 +36,8 @@ public class ManagerControll {
     LoseService loseService;
     @Autowired
     LoserService loserService;
+    @Autowired
+    Email_MService email_mService;
     /*用户管理*/
 
         /*修改*/
@@ -85,6 +89,9 @@ public class ManagerControll {
         * */
         @RequestMapping("select_alluser")
         @ResponseBody
+       /* public  void ss(){
+            studentUserService.selectAllUser();
+        }*/
         public PagedResult<StudentUser> select_alluser(Integer pageNumber, Integer pageSize){
             try{
                 PagedResult<StudentUser> studentUserPagedResult=studentUserService.select_AllUser_Page(pageNumber, pageSize);
@@ -155,7 +162,7 @@ public class ManagerControll {
         * 分页
         * */
         @ResponseBody
-        @RequestMapping("select_alllose")
+        @RequestMapping("select_allloser")
         public PagedResult<LoserGood> select_allloser(Integer pageNumber, Integer pageSize){
             try {
                 PagedResult<LoserGood> pageResult = loserService.all_loser(pageNumber, pageSize);
@@ -196,7 +203,7 @@ public class ManagerControll {
         }
     /*审核管理 */
 
-    /*审核*/
+        /*审核*/
         @ResponseBody
         @RequestMapping("repair_check")
         public ArrayList<Integer> repair_check(String type,int... id){
@@ -211,7 +218,7 @@ public class ManagerControll {
                 return null;
             }
         }
-    /*查询所有已经审核的信息*/
+        /*查询所有已经审核的信息*/
         @ResponseBody
         @RequestMapping("select_checked")
         public PagedResult<?> select_checked(String type,Integer pageNumber, Integer pageSize){
@@ -234,29 +241,29 @@ public class ManagerControll {
             }
         }
 
-    /*查询所有未审核的信息*/
+         /*查询所有未审核的信息*/
 
-    @ResponseBody
-    @RequestMapping("select_check")
-    public PagedResult<?> select_check(String type,Integer pageNumber, Integer pageSize){
-        if(type=="拾物"){
-            try {
-                PagedResult<LoserGood> pageResult = loserService.selectcheck(pageNumber, pageSize);
-                return pageResult;
-            } catch (Exception e) {
+        @ResponseBody
+        @RequestMapping("select_check")
+        public PagedResult<?> select_check(String type,Integer pageNumber, Integer pageSize){
+            if(type=="拾物"){
+                try {
+                    PagedResult<LoserGood> pageResult = loserService.selectcheck(pageNumber, pageSize);
+                    return pageResult;
+                } catch (Exception e) {
+                    return null;
+                }
+            }else if(type=="失物"){
+                try {
+                    PagedResult<LoseGood> pageResult = loseService.selectcheck(pageNumber, pageSize);
+                    return pageResult;
+                } catch (Exception e) {
+                    return null;
+                }
+            }else {
                 return null;
             }
-        }else if(type=="失物"){
-            try {
-                PagedResult<LoseGood> pageResult = loseService.selectcheck(pageNumber, pageSize);
-                return pageResult;
-            } catch (Exception e) {
-                return null;
-            }
-        }else {
-            return null;
         }
-    }
     /*发布信息管理
     *
     * 在已经审核的列表中在选择发布信息
@@ -276,12 +283,32 @@ public class ManagerControll {
     *
     * 目前做系统邮件
     * */
-    @ResponseBody
-    @RequestMapping("email")
-    public void send_email(String title,String msg,String time,String managernum){
-        //将该信息保存在数据表email_M中
 
+
+    /*发送*/
+    @ResponseBody
+    @RequestMapping("sendemail")
+    public String send_email(Emaile_M emaile_m){
+        //将该信息保存在数据表email_M中
+        System.out.println("testControll");
+        boolean i=email_mService.sendemail(emaile_m);
+        if(i){
+            return "true";
+        }else return "false";
     }
+/*删除*/
+    @ResponseBody
+    @RequestMapping("deleteemail")
+    public String delete_email(String id){
+        //将该信息保存在数据表email_M中
+        boolean i=email_mService.deleteemail(Integer.parseInt(id));
+        if(i){
+            return "true";
+        }else return "false";
+    }
+    /*留言功能*/
+
+
 
     /*
     * manager的搜索功能

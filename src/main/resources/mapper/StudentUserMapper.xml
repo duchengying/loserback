@@ -143,8 +143,15 @@
     where student_num = #{studentNum,jdbcType=VARCHAR}
   </update>
 <!--Manager：查询所有的用户信息-->
-  <select id="selectAll">
-    SELECT * FROM school_user
+  <select id="selectAll" resultMap="BaseResultMap">
+  SELECT * FROM school_user
 
+</select>
+ <!-- <select id="selectAll1" statementType="CALLABLE">
+    CALL sss();
+
+  </select>-->
+  <select id="selectAll1" statementType="CALLABLE" resultMap="BaseResultMap">
+    {call sss()}
   </select>
 </mapper>
